@@ -1,0 +1,71 @@
+name: Publish site image
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: publish-site
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  packages: write
+
+env:
+  IMAGE: ghcr.io/wizd/goose-chinese-community
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Build and push image
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          rm -rf "$RUNNER_TEMP/site-image"
+          mkdir -p "$RUNNER_TEMP/site-image"
+          cp deploy/Dockerfile deploy/nginx.conf "$RUNNER_TEMP/site-image/"
+          cp -a build "$RUNNER_TEMP/site-image/public"
+          docker build \
+            -t "$IMAGE:${{ github.sha }}" \
+            -t "$IMAGE:latest" \
+            "$RUNNER_TEMP/site-image"
+          docker push "$IMAGE:${{ github.sha }}"
+          docker push "$IMAGE:latest"
+
+      - name: Make the image public
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for _ in 1 2 3 4 5 6; do
+            if gh api --method PUT \
+              -H "Accept: application/vnd.github+json" \
+              "/user/packages/container/goose-chinese-community/visibility" \
+              -f visibility=public; then
+              break
+            fi
+            sleep 5
+          done
+          docker logout ghcr.io
+          docker pull "$IMAGE:${{ github.sha }}"
+
+      - name: Point the deploy branch at this image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin deploy
+          git checkout -B deploy origin/deploy
+          git rm -r --ignore-unmatch public nginx.conf
+          printf 'FROM %s:%s\n' "$IMAGE" "${{ github.sha }}" > Dockerfile
+          git add Dockerfile
+          git commit -m "Point Coolify at ${IMAGE}:${{ github.sha }}"
+          git push origin HEAD:deploy

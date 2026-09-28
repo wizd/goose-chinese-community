@@ -1,51 +1,65 @@
 import { execFileSync } from "node:child_process";
-import fs from "node:fs";
-import os from "node:os";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
-const buildDir = path.join(root, "build");
-const staging = fs.mkdtempSync(path.join(os.tmpdir(), "goose-deploy-"));
-const indexFile = path.join(os.tmpdir(), `goose-deploy-index-${process.pid}`);
 
-function git(args, capture = false) {
-  const result = execFileSync("git", ["-c", "core.autocrlf=false", ...args], {
+function run(command, args, capture = false) {
+  const result = execFileSync(command, args, {
     cwd: root,
-    env: { ...process.env, GIT_INDEX_FILE: indexFile },
     encoding: "utf8",
     stdio: capture ? ["ignore", "pipe", "pipe"] : "inherit",
-    maxBuffer: 64 * 1024 * 1024,
   });
   return capture ? result.trim() : "";
 }
 
-try {
-  if (!fs.existsSync(path.join(buildDir, "index.html"))) {
-    console.error("缺少 build/index.html。请先运行 npm run build");
-    process.exit(1);
-  }
+const dirty = run("git", ["status", "--porcelain"], true);
+if (dirty) {
+  console.error("工作区有未提交的改动。提交并留在 master 后再发布。");
+  process.exit(1);
+}
 
-  const remotes = git(["remote"], true).split(/\r?\n/).filter(Boolean);
-  if (!remotes.includes("origin")) {
-    console.error("没有 origin。请先把仓库推到 wizd/goose-chinese-community。");
-    process.exit(1);
-  }
+const branch = run("git", ["rev-parse", "--abbrev-ref", "HEAD"], true);
+if (branch !== "master") {
+  console.error(`当前在 ${branch}。请在 master 上发布。`);
+  process.exit(1);
+}
 
-  fs.cpSync(buildDir, path.join(staging, "public"), { recursive: true });
-  fs.copyFileSync(path.join(root, "deploy", "Dockerfile"), path.join(staging, "Dockerfile"));
-  fs.copyFileSync(path.join(root, "deploy", "nginx.conf"), path.join(staging, "nginx.conf"));
+run("git", ["push", "origin", "master"]);
+run("gh", ["workflow", "run", "publish-site.yml", "--ref", "master"]);
 
-  git(["read-tree", "--empty"]);
-  git(["--work-tree", staging, "add", "-A"]);
-  const tree = git(["write-tree"], true);
-  const commit = git(
-    ["commit-tree", tree, "-m", "Publish static site for Coolify"],
+let runId = "";
+for (let attempt = 0; attempt < 30 && !runId; attempt += 1) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 2000);
+  const listed = run(
+    "gh",
+    [
+      "run",
+      "list",
+      "--workflow",
+      "publish-site.yml",
+      "--limit",
+      "1",
+      "--json",
+      "databaseId,status,headSha",
+    ],
     true,
   );
-  git(["update-ref", "refs/heads/deploy", commit]);
-  git(["push", "--force", "origin", "refs/heads/deploy:refs/heads/deploy"]);
-  console.log(`已覆盖 origin/deploy（${commit.slice(0, 12)}）。master 未改。`);
-} finally {
-  fs.rmSync(staging, { recursive: true, force: true });
-  fs.rmSync(indexFile, { force: true });
+  const latest = JSON.parse(listed)[0];
+  if (!latest) {
+    continue;
+  }
+  const head = run("git", ["rev-parse", "HEAD"], true);
+  if (latest && latest.headSha === head && latest.status !== "completed") {
+    runId = String(latest.databaseId);
+  }
 }
+
+if (!runId) {
+  console.error("没有等到 GitHub Actions 开始。请到 Actions 页查看 publish-site。");
+  process.exit(1);
+}
+
+run("gh", ["run", "watch", runId, "--exit-status"]);
+console.log(
+  `镜像已推到 ghcr.io/wizd/goose-chinese-community，deploy 分支只保留一行 FROM。Coolify 会拉取这个镜像。运行：gh run view ${runId}`,
+);

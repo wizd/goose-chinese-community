@@ -6,6 +6,7 @@ import Translate, {translate} from "@docusaurus/Translate";
 import styles from "./index.module.css";
 import { GooseLogo } from "../components/GooseLogo";
 import {CHINESE_DOWNLOAD_URL, useChineseLocale} from "../utils/download-href";
+import {CHINESE_SITE_TITLE} from "../utils/site-title";
 
 function HeroSection() {
   return (
@@ -424,8 +425,10 @@ function VideoSection() {
 }
 
 export default function Home(): ReactNode {
+  const chinese = useChineseLocale();
   return (
     <Layout
+      title={chinese ? CHINESE_SITE_TITLE : undefined}
       description={translate({
         id: "home.meta.description",
         message:

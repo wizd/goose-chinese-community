@@ -28,22 +28,13 @@ npm run serve
 
 ## 发布到 Coolify
 
-在本机构建。Coolify 跟踪 `deploy` 分支，只用 Nginx 托管静态文件，不在服务器上跑 `npm run build`。
+构建和镜像推送在 GitHub Actions 里完成。静态文件不进 Git。Coolify 仍跟踪 `deploy` 分支，但这个分支只有一行 `FROM`，指向 `ghcr.io/wizd/goose-chinese-community`。
 
 ```bash
-npm run build
 npm run publish-deploy
 ```
 
-`publish-deploy` 把 `build/` 和 [`deploy/Dockerfile`](deploy/Dockerfile) 做成孤立提交，覆盖 `origin/deploy`。`master` 不会被强推。`/build` 仍然不进 `master`。
-
-在 Coolify 的 `wizd/goose-chinese-community` 应用里：
-
-- 取消还在跑的 Nixpacks 部署
-- Build Pack 改为 Dockerfile
-- Branch 改为 `deploy`
-- Port 改为 `8080`
-- 域名保持 `https://goose.vcorp.ai`
+先把要发布的改动提交到 `master`。`publish-deploy` 会推送 `master`，然后等待 Actions：在云端 `npm run build`，把镜像推到 GHCR，再把 `deploy` 分支改成该镜像的 `FROM`。Coolify 看到 `deploy` 更新后拉取镜像，端口仍是 `8080`。
 
 ## 上游同步
 

@@ -1,11 +1,11 @@
-# goose Documentation
-# https://goose-docs.ai/
+# goose documentation
+# https://goose.vcorp.ai/
 
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://goose-docs.ai/sitemap.xml
+# Sitemap index lists the English and Chinese sitemaps.
+Sitemap: https://goose.vcorp.ai/sitemap-index.xml
 
 # LLM context file available at /llms.txt
 
