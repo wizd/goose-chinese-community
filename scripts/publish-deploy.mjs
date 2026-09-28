@@ -2,6 +2,7 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 
 const root = path.resolve(import.meta.dirname, "..");
+const repo = "wizd/goose-chinese-community";
 
 function run(command, args, capture = false) {
   const result = execFileSync(command, args, {
@@ -25,7 +26,7 @@ if (branch !== "master") {
 }
 
 run("git", ["push", "origin", "master"]);
-run("gh", ["workflow", "run", "publish-site.yml", "--ref", "master"]);
+run("gh", ["workflow", "run", "publish-site.yml", "--repo", repo, "--ref", "master"]);
 
 let runId = "";
 for (let attempt = 0; attempt < 30 && !runId; attempt += 1) {
@@ -35,6 +36,8 @@ for (let attempt = 0; attempt < 30 && !runId; attempt += 1) {
     [
       "run",
       "list",
+      "--repo",
+      repo,
       "--workflow",
       "publish-site.yml",
       "--limit",
@@ -59,7 +62,7 @@ if (!runId) {
   process.exit(1);
 }
 
-run("gh", ["run", "watch", runId, "--exit-status"]);
+run("gh", ["run", "watch", runId, "--repo", repo, "--exit-status"]);
 console.log(
   `镜像已推到 ghcr.io/wizd/goose-chinese-community，deploy 分支只保留一行 FROM。Coolify 会拉取这个镜像。运行：gh run view ${runId}`,
 );
