@@ -1,0 +1,1 @@
+FROM ghcr.io/wizd/goose-chinese-community:029c5b79d05cef1d5cb69e83e64d659da985696d
