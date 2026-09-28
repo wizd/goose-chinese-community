@@ -26,6 +26,25 @@ npm run serve
 
 导航栏的语言菜单会记住选择。生产构建里，第一次打开站点时，浏览器语言以 `zh` 开头会进入 `/zh-Hans/`，否则留在英文。
 
+## 发布到 Coolify
+
+在本机构建。Coolify 跟踪 `deploy` 分支，只用 Nginx 托管静态文件，不在服务器上跑 `npm run build`。
+
+```bash
+npm run build
+npm run publish-deploy
+```
+
+`publish-deploy` 把 `build/` 和 [`deploy/Dockerfile`](deploy/Dockerfile) 做成孤立提交，覆盖 `origin/deploy`。`master` 不会被强推。`/build` 仍然不进 `master`。
+
+在 Coolify 的 `wizd/goose-chinese-community` 应用里：
+
+- 取消还在跑的 Nixpacks 部署
+- Build Pack 改为 Dockerfile
+- Branch 改为 `deploy`
+- Port 改为 `8080`
+- 域名保持 `https://goose.vcorp.ai`
+
 ## 上游同步
 
 `UPSTREAM.json` 记录当前对齐的上游 commit。译文对应的英文 blob 记在 `i18n/zh-Hans/translation-meta.json`。

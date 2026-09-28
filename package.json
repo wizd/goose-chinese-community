@@ -15,7 +15,8 @@
     "test": "node --test scripts/*.test.js",
     "typecheck": "tsc",
     "serve-static": "node scripts/serve-static.js",
-    "sync-upstream": "node scripts/sync-upstream.mjs"
+    "sync-upstream": "node scripts/sync-upstream.mjs",
+    "publish-deploy": "node scripts/publish-deploy.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "^3.9.2",

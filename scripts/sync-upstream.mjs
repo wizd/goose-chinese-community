@@ -149,6 +149,7 @@ function ensurePackageScript(bytes) {
   const pkg = JSON.parse(bytes.toString("utf8"));
   pkg.scripts = pkg.scripts || {};
   pkg.scripts["sync-upstream"] = "node scripts/sync-upstream.mjs";
+  pkg.scripts["publish-deploy"] = "node scripts/publish-deploy.mjs";
   return Buffer.from(`${JSON.stringify(pkg, null, 2)}\n`);
 }
 
