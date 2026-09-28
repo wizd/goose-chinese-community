@@ -1,0 +1,100 @@
+---
+title: 上下文工程
+hide_title: true
+description: 为 goose 提供有效工作所需的知识、偏好和工作流
+---
+
+import Card from '@site/src/components/Card';
+import styles from '@site/src/components/Card/styles.module.css';
+
+<h1 className={styles.pageTitle}>上下文工程</h1>
+<p className={styles.pageDescription}>
+  上下文工程是在构建背景知识、偏好和工作流，帮助 goose 更有效地工作。你不必反复重复指令，而是定义一次，并教会 goose 你的工作方式。
+</p>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>📚 文档与指南</h2>
+  <div className={styles.cardGrid}>
+    <Card 
+      title="使用 goosehints"
+      description="使用 AGENTS.md、.goosehints 和其他文件提供项目上下文、偏好和指令，由 goose 自动加载。"
+      link="/docs/guides/context-engineering/using-goosehints"
+    />
+    <Card 
+      title="使用技能"
+      description="创建可复用的指令集，其中包含工作流、脚本和其他资源，供 goose 按需加载。"
+      link="/docs/guides/context-engineering/using-skills"
+    />
+    <Card
+      title="自定义代理"
+      description="创建、编辑、导入和导出具有可复用提示词及可选元数据的专用 goose 代理。"
+      link="/docs/guides/context-engineering/custom-agents"
+    />
+    <Card 
+      title="插件"
+      description="安装、更新和管理扩展 goose 的软件包，其中包含技能、钩子和其他可复用组件。"
+      link="/docs/guides/context-engineering/plugins"
+    />
+    <Card 
+      title="钩子"
+      description="在 goose 启动会话、提交提示词、调用工具、编辑文件或执行 shell 命令时运行脚本。"
+      link="/docs/guides/context-engineering/hooks"
+    />
+    <Card 
+      title="自定义斜杠命令"
+      description="创建自定义快捷方式，用简单的斜杠命令在任意聊天会话中快速运行可复用指令。"
+      link="/docs/guides/context-engineering/slash-commands"
+    />
+    <Card 
+      title="提示词模板"
+      description="自定义内置提示词，它们定义 goose 如何回应、规划、压缩上下文以及创建配方。"
+      link="/docs/guides/context-engineering/prompt-templates"
+    />
+    <Card 
+      title="子代理"
+      description="把聚焦的任务委派给隔离的 goose 实例，这些实例可以顺序或并行运行。"
+      link="/docs/guides/context-engineering/subagents"
+    />
+    <Card 
+      title="持久指令"
+      description="每一轮都把关键提醒注入 goose 的工作记忆。适合绝不能被遗忘的安全护栏和行为规则。"
+      link="/docs/guides/context-engineering/using-persistent-instructions"
+    />
+    <Card 
+      title="Memory 扩展"
+      description="教 goose 可以跨会话回忆的持久知识。保存命令、代码片段和偏好，以获得一致的协助。"
+      link="/docs/mcp/memory-mcp"
+    />
+    <Card 
+      title="研究 → 计划 → 实现模式"
+      description="了解斜杠命令如何让指令轻松融入交互式 RPI 工作流。"
+      link="/docs/tutorials/rpi"
+    />
+  </div>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>📝 精选博客</h2>
+  <div className={styles.cardGrid}>
+    <Card 
+      title="我的 .goosehints 文件里有什么"
+      description="深入比较 .goosehints 与 Memory 扩展，以及如何优化 goose 配置以获得更好的性能。"
+      link="/blog/2025/06/05/whats-in-my-goosehints-file"
+    />
+    <Card 
+      title="阻止 AI 代理做出不想要的改动"
+      description="教你的 AI 代理尽早、经常提交，以便控制变更并安全回滚。"
+      link="/blog/2025/12/10/stop-ai-agent-unwanted-changes"
+    />
+    <Card 
+      title="给 AI 怀疑者的上下文窗口指南"
+      description="AI 代理为什么会遗忘？了解上下文窗口、token 和 goose 如何帮助你管理记忆与长对话。"
+      link="/blog/2025/08/18/understanding-context-windows"
+    />
+    <Card
+      title="钩子：在每个 goose 事件上运行你自己的脚本"
+      description="了解生命周期钩子如何让你用自己的脚本响应会话、提示词、工具、文件和 shell 事件。"
+      link="/blog/2026/05/14/goose-hooks"
+    />
+  </div>
+</div>

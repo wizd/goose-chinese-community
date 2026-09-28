@@ -1,0 +1,69 @@
+---
+title: 借助 MCP 应用的丰富交互式聊天
+hide_title: true
+description: 构建在 goose 桌面版内部渲染的交互式 UI 应用，使用 MCP 应用
+---
+
+import Card from "@site/src/components/Card";
+import styles from "@site/src/components/Card/styles.module.css";
+import VideoCarousel from "@site/src/components/VideoCarousel";
+
+<h1 className={styles.pageTitle}>借助 MCP 应用的丰富交互式聊天</h1>
+<p className={styles.pageDescription}>
+  goose 桌面版支持把纯文本回复转变为图形化、可交互体验的扩展。你不必通读列表和说明，而是可以直接在对话中点击、探索并与 UI 组件交互。
+</p>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>📚 文档与指南</h2>
+  <div className={styles.cardGrid}>
+    <Card
+      title="构建 MCP 应用"
+      description="分步教程：创建在 goose 桌面版内部渲染的交互式 UI 应用。"
+      link="/docs/tutorials/building-mcp-apps"
+    />
+    <Card
+      title="使用 MCP 应用"
+      description="启动独立应用，并在 goose 桌面版对话中直接渲染交互式 UI。"
+      link="/docs/guides/interactive-chat/mcp-ui"
+    />
+    <Card
+      title="Auto Visualiser 扩展"
+      description="在 goose 中自动生成交互式数据可视化。"
+      link="/docs/mcp/autovisualiser-mcp"
+    />
+  </div>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>🎥 视频</h2>
+
+  <VideoCarousel
+    id="mcp-apps-videos"
+    videos={[
+      {
+        type: "iframe",
+        src: "https://youtube.com/embed/QcojQ3Fwqsw",
+        title: "什么是 MCP 应用？",
+        description:
+          "MCP 应用是什么，以及它们如何在 goose 中渲染交互式 UI",
+        duration: "1:53",
+      },
+    ]}
+  />
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>📝 精选博客</h2>
+  <div className={styles.cardGrid}>
+    <Card
+      title="从 MCP-UI 到 MCP 应用：交互式代理 UI 的演进"
+      description="一份实用的 MCP 应用迁移指南：4 项关键变化、哪些地方会出问题，以及这次转变为什么重要。"
+      link="/blog/2026/01/22/mcp-ui-to-mcp-apps"
+    />
+    <Card
+      title="goose 落地 MCP 应用"
+      description="goose 提前支持 MCP 应用规范草案，与新兴的交互式 UI 标准对齐。"
+      link="/blog/2026/01/06/mcp-apps"
+    />
+  </div>
+</div>

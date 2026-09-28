@@ -1,0 +1,46 @@
+{
+  "logo.alt": {
+    "message": "goose 标志",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Quickstart": {
+    "message": "快速开始",
+    "description": "Navbar item with label Quickstart"
+  },
+  "item.label.Docs": {
+    "message": "文档",
+    "description": "Navbar item with label Docs"
+  },
+  "item.label.Tutorials": {
+    "message": "教程",
+    "description": "Navbar item with label Tutorials"
+  },
+  "item.label.Blog": {
+    "message": "博客",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.Resources": {
+    "message": "资源",
+    "description": "Navbar item with label Resources"
+  },
+  "item.label.Discord": {
+    "message": "Discord",
+    "description": "Navbar item with label Discord"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.Extensions": {
+    "message": "扩展",
+    "description": "Navbar item with label Extensions"
+  },
+  "item.label.Recipe Cookbook": {
+    "message": "配方手册",
+    "description": "Navbar item with label Recipe Cookbook"
+  },
+  "item.label.Deeplink Generator": {
+    "message": "深链生成器",
+    "description": "Navbar item with label Deeplink Generator"
+  }
+}

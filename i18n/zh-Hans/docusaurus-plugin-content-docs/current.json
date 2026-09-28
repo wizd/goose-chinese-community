@@ -1,0 +1,94 @@
+{
+  "version.label": {
+    "message": "下一版",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started": {
+    "message": "入门",
+    "description": "The label for category 'Getting Started' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Getting Started.link.generated-index.description": {
+    "message": "快速上手 goose",
+    "description": "The generated-index page description for category 'Getting Started' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.GDK": {
+    "message": "GDK",
+    "description": "The label for category 'GDK' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.SDK": {
+    "message": "SDK",
+    "description": "The label for category 'SDK' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.ACP": {
+    "message": "ACP",
+    "description": "The label for category 'ACP' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Guides": {
+    "message": "指南",
+    "description": "The label for category 'Guides' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Guides.link.generated-index.description": {
+    "message": "使用 goose 的要点和建议",
+    "description": "The generated-index page description for category 'Guides' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Managing Sessions": {
+    "message": "管理会话",
+    "description": "The label for category 'Managing Sessions' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Context Engineering": {
+    "message": "上下文工程",
+    "description": "The label for category 'Context Engineering' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Recipes": {
+    "message": "配方",
+    "description": "The label for category 'Recipes' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Managing Tools": {
+    "message": "管理工具",
+    "description": "The label for category 'Managing Tools' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Security": {
+    "message": "安全",
+    "description": "The label for category 'Security' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.MCP Apps": {
+    "message": "MCP 应用",
+    "description": "The label for category 'MCP Apps' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Tutorials": {
+    "message": "教程",
+    "description": "The label for category 'Tutorials' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Tutorials.link.generated-index.description": {
+    "message": "在各种场景里使用 goose",
+    "description": "The generated-index page description for category 'Tutorials' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.MCP Servers": {
+    "message": "MCP 服务器",
+    "description": "The label for category 'MCP Servers' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.MCP Servers.link.generated-index.description": {
+    "message": "如何把 MCP 服务器作为 goose 扩展接入和使用",
+    "description": "The generated-index page description for category 'MCP Servers' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Architecture Overview": {
+    "message": "架构概览",
+    "description": "The label for category 'Architecture Overview' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Architecture Overview.link.generated-index.description": {
+    "message": "用扩展和自定义配置扩展 goose 的能力",
+    "description": "The generated-index page description for category 'Architecture Overview' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Experimental": {
+    "message": "实验功能",
+    "description": "The label for category 'Experimental' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Remote Access": {
+    "message": "远程访问",
+    "description": "The label for category 'Remote Access' in sidebar 'tutorialSidebar'"
+  },
+  "sidebar.tutorialSidebar.category.Troubleshooting": {
+    "message": "故障排除",
+    "description": "The label for category 'Troubleshooting' in sidebar 'tutorialSidebar'"
+  }
+}

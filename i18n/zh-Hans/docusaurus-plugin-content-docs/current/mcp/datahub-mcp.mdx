@@ -1,0 +1,255 @@
+---
+title: DataHub 扩展
+description: 将 DataHub MCP 服务器添加为 goose 扩展
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import YouTubeShortEmbed from '@site/src/components/YouTubeShortEmbed';
+import CLIExtensionInstructions from '@site/src/components/CLIExtensionInstructions';
+import GooseDesktopInstaller from '@site/src/components/GooseDesktopInstaller';
+
+<YouTubeShortEmbed videoUrl="https://www.youtube.com/embed/VXRvHIZ3Eww?start=1878" />
+
+本教程介绍如何将 [DataHub MCP 服务器](https://github.com/acryldata/mcp-server-datahub) 添加为 goose 扩展，以便在整个数据生态中进行 AI 驱动的数据发现、血缘探索和元数据查询。
+
+:::tip 快速安装
+<Tabs groupId="interface">
+  <TabItem value="ui" label="goose Desktop" default>
+  [启动安装程序](goose://extension?cmd=uvx&arg=mcp-server-datahub%40latest&id=datahub-mcp&name=DataHub&description=Data%20discovery%20and%20metadata%20platform%20integration&env=DATAHUB_GMS_URL%3DDataHub%20GMS%20URL%20(e.g.%2C%20https%3A%2F%2Fyour-instance.acryl.io%20or%20http%3A%2F%2Flocalhost%3A8080)&env=DATAHUB_GMS_TOKEN%3DDataHub%20Personal%20Access%20Token)
+  </TabItem>
+  <TabItem value="cli" label="goose CLI">
+  **命令**
+  ```sh
+  uvx mcp-server-datahub@latest
+  ```
+  </TabItem>
+</Tabs>
+  **环境变量**
+  ```
+  DATAHUB_GMS_URL: <your-datahub-url>
+  DATAHUB_GMS_TOKEN: <your-datahub-token>
+  ```
+:::
+
+## 什么是 DataHub？
+
+[DataHub](https://datahub.com/) 是一个开源元数据平台，为你的数据生态提供统一视图，编目数据集、仪表盘、管道等，并附带丰富的元数据，包括所有权、血缘、使用统计和数据质量信息。
+
+DataHub MCP 服务器让 AI 代理能够：
+- 使用带有热度、质量和血缘等信任信号的自然语言搜索，**找到可信的数据**
+- **探索数据血缘**，在表级和列级理解上游和下游依赖
+- 通过词汇表、域、数据产品和组织元数据**理解业务上下文**
+- 借助文档、血缘和常见查询模式**生成 SQL 查询**
+
+了解更多：[DataHub MCP 服务器指南](https://docs.datahub.com/docs/features/feature-guides/mcp) | [GitHub 仓库](https://github.com/acryldata/mcp-server-datahub)
+
+## 前提条件
+
+使用 DataHub MCP 服务器之前，请确保你有：
+
+- 已安装 **Python 3.10+** 和 **[uv](https://docs.astral.sh/uv/#installation)** 包管理器
+- 一个 **DataHub 实例**：[DataHub Cloud](https://www.datahub.com) 或[自托管 DataHub](https://docs.datahub.com/docs/quickstart)
+- 来自你的 DataHub 实例的 **[个人访问令牌](https://docs.datahub.com/docs/authentication/personal-access-tokens)**
+
+## 配置
+
+:::info
+运行此命令需要在系统上安装 [uv](https://docs.astral.sh/uv/#installation)，因为它使用 `uvx`。
+:::
+
+<Tabs groupId="interface">
+  <TabItem value="ui" label="goose Desktop" default>
+
+    <GooseDesktopInstaller
+      extensionId="datahub-mcp"
+      extensionName="DataHub"
+      description="数据发现与元数据平台集成"
+      type="stdio"
+      command="uvx"
+      args={["mcp-server-datahub@latest"]}
+      envVars={[
+        { name: "DATAHUB_GMS_URL", label: "DataHub GMS URL (e.g., https://your-instance.acryl.io or http://localhost:8080)" },
+        { name: "DATAHUB_GMS_TOKEN", label: "DataHub Personal Access Token" }
+      ]}
+      apiKeyLink="https://docs.datahub.com/docs/authentication/personal-access-tokens"
+      apiKeyLinkText="DataHub Personal Access Token"
+    />
+
+  </TabItem>
+  <TabItem value="cli" label="goose CLI">
+
+    <CLIExtensionInstructions
+      name="DataHub"
+      description="数据发现与元数据平台集成"
+      type="stdio"
+      command="uvx mcp-server-datahub@latest"
+      timeout={300}
+      envVars={[
+        { key: "DATAHUB_GMS_URL", value: "https://your-instance.acryl.io" },
+        { key: "DATAHUB_GMS_TOKEN", value: "▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪" }
+      ]}
+      infoNote={
+        <>
+          从{" "}
+          <a href="https://docs.datahub.com/docs/authentication/personal-access-tokens" target="_blank" rel="noopener noreferrer">
+            DataHub 文档
+          </a>{" "}
+          获取个人访问令牌。使用你的 DataHub GMS URL（例如 DataHub Cloud 用 https://your-instance.acryl.io，本地实例用 http://localhost:8080）。
+        </>
+      }
+    />
+
+  </TabItem>
+</Tabs>
+
+## 使用示例
+
+### 找到可信的数据
+
+用自然语言描述你的需要，找出与项目相关的数据集。
+
+#### goose 提示词
+
+> _找出分析团队拥有的、与客户交易相关的所有数据集_
+
+#### goose 输出
+
+:::note 桌面版
+
+DataHub 扩展会搜索你的数据目录，并返回相关数据集及其元数据，包括：
+
+- 数据集名称和描述
+- 列名、类型、描述和标签
+- 所有者
+- 标签、属性和词汇表术语
+- 使用统计
+- 数据质量状态
+
+:::
+
+### 探索数据血缘
+
+我想从 customer_orders 表中删除 “timestamp_seconds” 列。什么会坏掉？
+
+#### goose 提示词
+
+> _给我看 customer_orders 表的上游血缘_
+
+#### goose 输出
+
+:::note 桌面版
+
+扩展会遍历血缘图，并展示任何会受删除该列影响的：
+
+- 源表和数据集
+- 转换管道
+- ETL 作业和工作流
+- 下游列
+
+:::
+
+### 生成 SQL 查询
+
+我如何计算去年在美国产生的订单数量？
+
+#### goose 提示词
+
+> _针对 customer_orders 数据集最常运行的查询有哪些？_
+
+#### goose 输出
+
+:::note 桌面版
+
+扩展会检索 SQL 查询历史，展示：
+
+- 频繁执行的查询
+- 常见的连接模式
+- 过滤条件
+- 聚合模式
+
+此外还有列名、类型、描述和任何标签。这将使代理能够生成高质量 SQL 来回答问题。
+
+:::
+
+### 理解数据质量与新鲜度
+
+在使用数据集之前，判断它是否可信。
+
+#### goose 提示词
+
+> _customer_orders 表是否新鲜，并且没有数据质量问题？_
+
+#### goose 输出
+
+:::note 桌面版
+
+扩展会获取：
+
+- 最新的数据质量断言和测试结果
+- 新鲜度 / 过期指标
+- Schema 变更历史
+- SLA 或 SLO 元数据
+- 所有者提供的健康状态
+
+从而使代理能够警告用户，或确认数据的可信度。
+
+:::
+
+## 能力
+
+DataHub MCP 服务器提供以下工具：
+
+**`search`**
+
+使用结构化关键词搜索（/q 语法）搜索 DataHub，支持布尔逻辑、过滤器、分页，以及按使用指标可选排序。
+
+**`get_lineage`**
+
+检索任意实体（数据集、列、仪表盘等）的上游或下游血缘，支持过滤、血缘内查询、分页和跳数控制。
+
+**`get_dataset_queries`**
+
+获取引用某个数据集或列的真实 SQL 查询（手工编写或系统生成），以理解使用模式、连接、过滤和聚合行为。
+
+**`get_entities`**
+
+按 URN 获取一个或多个实体的详细元数据；支持批量检索，以便高效检查搜索结果。
+
+**`list_schema_fields`**
+
+列出数据集的 schema 字段，支持关键词过滤和分页。当搜索结果截断了字段，或在探索大型 schema 时很有用。
+
+**`get_lineage_paths_between`**
+
+检索两个资产或列之间的确切血缘路径，包括中间转换和 SQL 查询信息。
+
+## 资源
+
+- [DataHub MCP 服务器 GitHub](https://github.com/acryldata/mcp-server-datahub)
+- [DataHub 文档](https://docs.datahub.com/docs/)
+- [DataHub MCP 服务器指南](https://docs.datahub.com/docs/features/feature-guides/mcp)
+- [演示视频](https://youtu.be/VXRvHIZ3Eww?t=1878)
+
+## 故障排除
+
+### 连接问题
+
+如果连接 DataHub 时遇到问题：
+
+1. 核实 `DATAHUB_GMS_URL` 是否正确：
+   - DataHub Cloud：`https://your-tenant.acryl.io`
+   - 本地实例：`http://localhost:8080`
+   - 本地部署：`https://datahub.your-company.com`
+
+2. 确认个人访问令牌有效，并且具有适当权限
+
+3. 检查网络连通性和防火墙规则
+
+### 安装问题
+
+如果找不到 `uvx`：
+
+1. 确保已安装 `uv`：`curl -LsSf https://astral.sh/uv/install.sh | sh`
+2. 重启终端，或 source 你的 shell 配置
+3. 验证安装：`which uvx`

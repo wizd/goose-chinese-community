@@ -1,0 +1,55 @@
+---
+title: 故障排除
+hide_title: true
+description: 获取帮助、报告问题，并排查 goose 的常见问题。
+---
+
+import Card from '@site/src/components/Card';
+import styles from '@site/src/components/Card/styles.module.css';
+
+<h1 className={styles.pageTitle}>故障排除</h1>
+<p className={styles.pageDescription}>
+  在需要时获取帮助、报告缺陷、请求功能，并找到常见问题的解决方案。goose 提供内置诊断，以及直达支持渠道的链接。
+</p>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>🛠️ 获取帮助</h2>
+  <div className={styles.cardGrid}>
+    <Card 
+      title="诊断与报告"
+      description="使用内置诊断、报告缺陷并请求新功能。包含生成故障排除数据的分步指南。"
+      link="/docs/troubleshooting/diagnostics-and-reporting"
+    />
+    <Card
+      title="调试桌面版启动失败"
+      description="找到桌面版启动诊断日志，理解关键字段，并在 goose 于后端就绪之前失败时附上正确的材料。"
+      link="/docs/troubleshooting/desktop-startup-debugging"
+    />
+    <Card 
+      title="已知问题"
+      description="全面的故障排除指南，涵盖常见问题、错误信息和特定平台问题，并提供分步解决方案。"
+      link="/docs/troubleshooting/known-issues"
+    />
+    <Card 
+      title="日志"
+      description="了解如何访问和解读 goose 会话日志与系统日志，用于调试和故障排除。"
+      link="/docs/guides/logs"
+    />
+  </div>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>💬 社区支持</h2>
+  <div className={styles.cardGrid}>
+    <Card 
+      title="Discord 社区"
+      description="加入我们活跃的 Discord 服务器，获得实时帮助、参与讨论，并得到 goose 用户和维护者的社区支持。"
+      link="https://discord.gg/n8R5VaWDAn"
+    />
+    <Card 
+      title="GitHub Issues"
+      description="浏览已有 issue、参与讨论，或在我们的 GitHub 仓库中创建新的缺陷报告和功能请求。"
+      link="https://github.com/aaif-goose/goose/issues"
+    />
+  </div>
+</div>

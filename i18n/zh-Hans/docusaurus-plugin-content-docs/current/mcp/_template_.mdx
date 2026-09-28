@@ -1,0 +1,149 @@
+---
+title: {Extension Name} 扩展
+description: 将 {Extension Name} MCP 服务器添加为 goose 扩展
+---
+
+<!-- 可以使用 Recipe Cookbook 中的 “Add MCP Server” 配方来起草教程 -->
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import YouTubeShortEmbed from '@site/src/components/YouTubeShortEmbed';
+import CLIExtensionInstructions from '@site/src/components/CLIExtensionInstructions';
+import GooseDesktopInstaller from '@site/src/components/GooseDesktopInstaller';
+import GooseBuiltinInstaller from '@site/src/components/GooseBuiltinInstaller';
+
+
+<YouTubeShortEmbed videoUrl="https://www.youtube.com/embed/VIDEO_ID" />
+
+
+本教程介绍如何将 [{Extension Name} MCP 服务器](/) 添加为 goose 扩展，以实现 ________________。
+
+:::tip 快速安装
+<Tabs groupId="interface">
+  <TabItem value="ui" label="goose Desktop" default>
+  [启动安装程序]({goose_url})
+  </TabItem>
+  <TabItem value="cli" label="goose CLI">
+  **命令**
+  ```sh
+  {command}
+  ```
+  </TabItem>
+</Tabs>
+  **环境变量**
+  ```
+  {env_var}: <ENV_VALUE>
+  ```
+:::
+
+## 配置
+
+:::info
+运行此命令需要在系统上安装 [Node.js](https://nodejs.org/)，因为它使用 `npx`。
+:::
+
+:::info
+运行此命令需要在系统上安装 [uv](https://docs.astral.sh/uv/#installation)，因为它使用 `uvx`。
+:::
+
+<Tabs groupId="interface">
+  <TabItem value="ui" label="goose Desktop" default>
+
+    <!-- 内置扩展 -->
+    <GooseBuiltinInstaller
+      extensionName="{Extension Name}"
+      description="{Extension description}"
+      extensionId="{extension_id}"
+    />
+
+    <!-- 外部 STDIO MCP 服务器（npx、uvx、git 等） -->
+    <GooseDesktopInstaller
+      extensionId="{extension_id}"
+      extensionName="{Extension Name}"
+      description="{Extension description}"
+      type="stdio"
+      command="npx"
+      args={["-y", "@package/name"]}
+      envVars={[
+        { name: "API_KEY", label: "Description or placeholder value" }
+      ]}
+      apiKeyLink="https://example.com/api-keys"
+      apiKeyLinkText="Service Access Token"
+    />
+
+    <!-- HTTP MCP 服务器 -->
+    <GooseDesktopInstaller
+      extensionId="{extension_id}"
+      extensionName="{Extension Name}"
+      description="{Extension description}"
+      type="http"
+      url="https://example-server.com/mcp"
+      envVars={[                                    // also used for http request headers
+        { name: "SOME_KEY", label: "Description or placeholder value" }
+      ]}
+      apiKeyLink="https://example.com/api-keys"
+      apiKeyLinkText="Service Access Token"
+    />
+
+  </TabItem>
+  <TabItem value="cli" label="goose CLI">
+
+    <!-- 外部 STDIO MCP 服务器（npx、uvx、git 等） -->
+    <CLIExtensionInstructions
+      name="{Extension Name}"
+      description="{Extension description}"
+      type="stdio"
+      command="{full command with args}"
+      timeout={300}
+      envVars={[
+        { key: "API_KEY", value: "▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪" }
+      ]}
+      infoNote={
+        <>
+          从 
+          <a href="https://example.com/api-keys" target="_blank" rel="noopener noreferrer">
+            example.com
+          </a> 获取 API 密钥并粘贴到此处。
+        </>
+      }
+    />
+
+    <!-- HTTP MCP 服务器 -->
+    <CLIExtensionInstructions
+      name="{Extension Name}"
+      description="{Extension description}"
+      type="http"
+      url="https://example-server.com/mcp"
+      timeout={300}
+      envVars={[                                    // also used for http request headers
+        { key: "API_KEY", value: "▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪" }
+      ]}
+      infoNote={
+        <>
+          从{" "}
+          <a href="https://example.com/api-keys" target="_blank" rel="noopener noreferrer">
+            example.com
+          </a> 获取 API 密钥。
+        </>
+      }
+    />
+    
+  </TabItem>
+</Tabs>
+
+## 使用示例
+
+{描述任何环境设置、访问控制，以及你想完成的事。}
+
+### goose 提示词
+
+> _精确的提示词_
+
+
+### goose 输出
+
+:::note 桌面版
+
+{精确的输出}
+
+:::

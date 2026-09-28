@@ -1,0 +1,118 @@
+---
+title: 配方
+hide_title: true
+description: 可复用、可分享的 AI 工作流
+---
+
+import Card from '@site/src/components/Card';
+import styles from '@site/src/components/Card/styles.module.css';
+import VideoCarousel from '@site/src/components/VideoCarousel';
+
+<h1 className={styles.pageTitle}>配方</h1>
+<p className={styles.pageDescription}>
+  配方是把扩展、提示词和设置打包在一起的可复用工作流。与团队分享经过验证的工作流，并持续复现成功的结果。
+</p>
+
+ <div className="video-container margin-bottom--lg">
+  <iframe 
+    width="100%"
+    height="400"
+    src="https://www.youtube.com/embed/8rTliYrQ6Iw"
+    title="用配方创建可复用的 AI 代理"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>📚 文档与指南</h2>
+  <div className={styles.cardGrid}>
+    <Card 
+      title="可复用配方"
+      description="把 goose 会话设置（包括工具、目标和指令）分享为可复用配方，其他人单击即可启动。"
+      link="/docs/guides/recipes/session-recipes"
+    />
+    <Card 
+      title="配方参考指南"
+      description="通过 CLI 在 goose 中创建和自定义配方的完整技术参考。"
+      link="/docs/guides/recipes/recipe-reference"
+    />
+    <Card 
+      title="自定义斜杠命令"
+      description="创建自定义快捷方式，用简单的斜杠命令在任意聊天会话中快速运行配方。"
+      link="/docs/guides/context-engineering/slash-commands"
+    />
+    <Card 
+      title="goose 配方教程"
+      description="了解如何使用提示词、参数、MCP 服务器等创建和使用 goose 配方。"
+      link="/docs/tutorials/recipes-tutorial"
+    />
+    <Card 
+      title="子配方"
+      description="了解配方如何使用子配方完成特定任务。"
+      link="/docs/guides/recipes/subrecipes"
+    />
+    <Card 
+      title="保存配方"
+      description="了解如何保存、整理和查找 goose 配方，以便访问和复用。"
+      link="/docs/guides/recipes/storing-recipes"
+    />
+    <Card 
+      title="并行子配方教程"
+      description="了解如何并发运行多个子配方实例。"
+      link="/docs/tutorials/subrecipes-in-parallel"
+    />
+  </div>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>🛠️ 配方手册</h2>
+  <div className={styles.cardGrid}>
+    <Card
+      title="配方手册"
+      description="浏览我们收集的即用配方。查找并改编常见开发场景的配方。"
+      link="/recipes"
+    />
+  </div>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>📝 精选博客</h2>
+  <div className={styles.cardGrid}>
+    <Card
+      title="冠军驱动开发"
+      description="用配方加速开发团队的工作流。"
+      link="/blog/2025/05/09/developers-ai-playbook-for-team-efficiency"
+    />
+    <Card
+      title="成功配方"
+      description="用配方扩展智能体工作流的价值。"
+      link="/blog/2025/05/06/recipe-for-success"
+    />
+  </div>
+</div>
+
+<div className={styles.categorySection}>
+  <h2 className={styles.categoryTitle}>🎥 更多视频</h2>
+
+<VideoCarousel
+  id="more-videos"
+  videos={[
+    { 
+      type: 'iframe', 
+      src: 'https://youtube.com/embed/1szmJSKInnU',
+      title: 'goose 中配方/子配方的进阶技巧',
+      description: '在 goose 中使用配方和子配方的进阶技巧',
+      duration: '10:07'
+    },
+    { 
+      type: 'iframe', 
+      src: 'https://youtube.com/embed/gvg7DomaJuA',
+      title: '无头 goose：调度并行子代理配方',
+      description: '调度一份让两个子代理并行运行的配方',
+      duration: '5:50'
+    }
+  ]}
+/>
+</div>
