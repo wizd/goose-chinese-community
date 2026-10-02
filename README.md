@@ -38,7 +38,7 @@ npm run publish-deploy
 
 ## 上游同步
 
-`UPSTREAM.json` 记录当前对齐的上游 commit。译文对应的英文 blob 记在 `i18n/zh-Hans/translation-meta.json`。
+`UPSTREAM.json` 记录当前对齐的上游 commit。译文对应的英文 blob 记在 `i18n/zh-Hans/translation-meta.json`。操作步骤、本地补丁和译完后如何改账本，见 [中文同步更新.md](中文同步更新.md)。
 
 ```bash
 npm run sync-upstream
