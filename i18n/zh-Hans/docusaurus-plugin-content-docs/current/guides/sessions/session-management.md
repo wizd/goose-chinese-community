@@ -107,6 +107,18 @@ import { AppWindow, PanelLeft, FolderDot, Paperclip, Copy, Edit2, Trash2, Downlo
         goose session --name react-migration
         ```
 
+        要重命名已有会话，使用 `session rename` 子命令：
+
+        ```sh
+        goose session rename --session-id 20260213_9 --new-name my-new-name
+        ```
+
+        如果省略会话 ID，goose 会提示你交互式选择一个会话：
+
+        ```sh
+        goose session rename --new-name my-new-name
+        ```
+
         如果你想确认会话名称，运行：
 
         ```sh

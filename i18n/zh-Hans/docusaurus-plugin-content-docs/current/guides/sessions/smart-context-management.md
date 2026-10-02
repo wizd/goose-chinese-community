@@ -379,7 +379,7 @@ goose 会自动检测低余额状况，因此你不会丢失对话上下文—�
 
 定价数据会定期从 OpenRouter API 获取并在本地缓存。`Advanced settings` 选项卡显示数据上次更新的时间，并允许你刷新。
 
-这些成本仅为估算，并不连接到你实际的提供商账单。显示的成本是基于 token 计数和公开定价数据的近似值。
+这些成本只是公开价格估算，不是发票，也不能代表你实际的提供商账单。显示的金额根据 token 计数和公开目录费率近似用量；当提供商报告了成本时，以提供商报告的成本为准。
 </TabItem>
     <TabItem value="cli" label="goose CLI">
     通过设置 `GOOSE_CLI_SHOW_COST` [环境变量](/docs/guides/environment-variables#session-management)，或把它写入[配置文件](/docs/guides/config-files)，在 goose CLI 中显示估算成本。

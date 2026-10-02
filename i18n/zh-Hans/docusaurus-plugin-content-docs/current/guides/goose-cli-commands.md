@@ -324,6 +324,24 @@ goose session remove -r ".*migration.*"
 
 ---
 
+#### session rename [options]
+重命名一个已保存的会话。如果没有提供会话 ID，goose 会提示你交互式选择一个会话。
+
+**选项：**
+- **`--session-id <session_id>`**：按会话 ID 重命名特定会话（例如 `20251108_3`）
+- **`-n, --new-name <name>`**：会话的新名称（必填）
+
+**用法：**
+```bash
+# Rename a specific session by ID
+goose session rename --session-id 20251108_3 --new-name my-project
+
+# Interactive selection (prompts you to choose a session)
+goose session rename --new-name my-project
+```
+
+---
+
 #### session export [options]
 以不同格式导出会话，用于备份、分享、迁移或文档目的。
 
@@ -696,6 +714,16 @@ goose acp
 
 :::info
 此命令由兼容 ACP 的客户端自动调用，通常不由用户直接运行。客户端管理 `goose acp` 进程的生命周期。细节见[在 ACP 客户端中使用 goose](/docs/gdk/acp)。
+:::
+
+:::warning 无人值守环境
+goose 默认使用系统密钥环。在 macOS 上，读取凭据时可能会显示钥匙串授权提示。如果 ACP 客户端在没有用户可以响应的情况下运行 goose，密钥环访问可能会无限期阻塞。
+
+为该进程禁用密钥环访问，并通过环境变量提供提供商凭据：
+
+```bash
+GOOSE_DISABLE_KEYRING=1 OPENAI_API_KEY='...' goose acp
+```
 :::
 
 ---

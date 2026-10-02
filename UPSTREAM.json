@@ -1,7 +1,7 @@
 {
   "remote": "https://github.com/aaif-goose/goose.git",
   "ref": "main",
-  "commit": "04ed836c8cde23e540cc77d256992e00be99298b",
+  "commit": "591edd47cf2cfea4957d720c607cf2a4def8673d",
   "path": "documentation",
   "protectedBlobs": {
     "README.md": "d81b96bb3b5252ae018c95799c26a99b7cb6fa2b",

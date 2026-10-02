@@ -6,7 +6,7 @@ sidebar_label: goose 权限
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import { PanelLeft, Tornado } from 'lucide-react';
+import { PanelLeft } from 'lucide-react';
 
 goose 的权限决定它在修改文件、使用扩展和执行自动化操作时有多少自主权。选择一种权限模式，你就能完全控制 goose 如何与开发环境交互。
 
@@ -42,20 +42,12 @@ goose 的权限决定它在修改文件、使用扩展和执行自动化操作�
 <Tabs groupId="interface">
   <TabItem value="ui" label="goose Desktop" default>
 
-    你可以在会话之前或期间更改模式，并立即生效。
+    每个会话有自己的权限模式。用 Settings 为新会话选择默认模式。更改此默认值时，已有会话会保持当前模式。
 
-     <Tabs groupId="method">
-      <TabItem value="session" label="In Session" default>
-
-      点击底部菜单中的 <Tornado className="inline" size={16} /> 模式按钮。
-      </TabItem>
-      <TabItem value="settings" label="From Settings">
-        1. 点击左上角的 <PanelLeft className="inline" size={16} /> 按钮打开侧边栏。
-        2. 在侧边栏中点击 `Settings` 按钮。
-        3. 点击 `Chat`。
-        4. 在 `Mode` 下选择你想要的模式。
-      </TabItem>
-    </Tabs>   
+    1. 点击左上角的 <PanelLeft className="inline" size={16} /> 按钮打开侧边栏。
+    2. 在侧边栏中点击 `Settings` 按钮。
+    3. 点击 `Chat`。
+    4. 在 `Default Mode` 下选择你想要的模式。
   </TabItem>
   <TabItem value="cli" label="goose CLI">
 
