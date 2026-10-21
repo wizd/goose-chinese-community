@@ -43,6 +43,7 @@ goose 兼容多种 LLM 提供商，你可以选择并接入偏好的模型。
 | [Groq](https://groq.com/)                                                   | 面向 LLM 的高性能推理硬件和工具。                                                                                                                                                                   | `GROQ_API_KEY`                                                                                                                                                                      |
 | [iFlytek Spark](https://www.xfyun.cn/doc/spark/HTTP%E8%B0%83%E7%94%A8%E6%96%87%E6%A1%A3.html) | 通过兼容 OpenAI 的 HTTP API 使用讯飞星火模型（4.0Ultra、generalv3.5、max-32k）。最适合聊天：星火需要 `tool_calls_switch=true`（此处无法注入）才能返回 OpenAI 风格的工具调用。 | `SPARK_API_PASSWORD` |
 | [iFlytek Astron MaaS](https://maas.xfyun.cn/)                               | 讯飞星辰托管 Spark X2、DeepSeek、GLM、Kimi、MiniMax、Qwen 和星辰编程模型，通过兼容 OpenAI 的 API。设置 `ASTRON_BASE_URL` 可在 Token Plan 和 Coding Plan 端点之间切换。 | `ASTRON_API_KEY`、`ASTRON_BASE_URL`（可选） |
+| [IO Intelligence](https://io.net/) | 通过 io.net 兼容 OpenAI 的 API，为开放权重模型（DeepSeek、Qwen、Llama、GLM、Kimi、gpt-oss 等）提供推理。 | `IONET_API_KEY` |
 | [LiteLLM](https://docs.litellm.ai/docs/) | LiteLLM 代理，支持多种模型、自动提示缓存和统一 API 访问。 | `LITELLM_HOST`、`LITELLM_BASE_PATH`（可选）、`LITELLM_API_KEY`（可选）、`LITELLM_CUSTOM_HEADERS`（可选）、`LITELLM_TIMEOUT`（可选） |
 | [LM Studio](https://lmstudio.ai/)                                          | 用 LM Studio 的 OpenAI 兼容服务器运行本地模型。**因为该提供商在本地运行，你必须先[下载模型](#local-llms)。**                                                           | 无需填写。默认连接到本地服务器 `localhost:1234`。                                                                                                             |
 | [Meta](https://dev.meta.ai/)                                                | Meta 的 Model API，Muse Spark 模型的所在地。                                                                                                                                | `META_MODEL_API_KEY`                                                                                                                                                                |
@@ -535,6 +536,24 @@ goose 支持把 [Agent Client Protocol (ACP)](https://agentclientprotocol.com/) 
 
   </TabItem>
 </Tabs>
+
+### 自定义模型价格
+
+自定义提供商 JSON 文件中的每个模型都可以声明以美元计价的**每个 token** 价格：
+
+```json
+{
+  "name": "my-model",
+  "input_token_cost": 0.00000242,
+  "output_token_cost": 0.00001,
+  "cache_read_token_cost": 0.000000242,
+  "cache_write_token_cost": 0.000003025
+}
+```
+
+`input_token_cost` 和 `output_token_cost` 都必须存在，goose 才会使用该模型配置的价格。缺了其中任何一个，goose 会回退到该模型的价目表价格。
+
+缓存读取价和缓存写入价各自可选。给出的缓存价格（包括 `0`）会覆盖价目表中的缓存费率。省略的缓存价格在价目表有费率时使用价目表费率，否则使用输入价格。把输入价格和输出价格都声明为 `0`，模型就保持免费，除非你显式设置了缓存价格。提供商上报的成本优先于估算。
 
 ### 基于命令的身份验证
 

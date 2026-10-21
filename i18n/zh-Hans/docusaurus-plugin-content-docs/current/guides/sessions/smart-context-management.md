@@ -26,10 +26,13 @@ goose 使用两层方法管理上下文：
 
 ## 自动压缩
 接近 token 限制时，goose 会自动把对话中较旧的部分压缩成摘要，让你无需手动干预即可维持长时间会话。
-在 goose 桌面版和 goose CLI 中，默认在达到 token 限制的 80% 时触发自动压缩。
+在 goose 桌面版和 goose CLI 中，默认在达到 token 限制的 80% 或 225,000 个 token 时触发自动压缩，以先到者为准。
+实际触发点是 `min(GOOSE_AUTO_COMPACT_THRESHOLD × 模型上下文窗口, GOOSE_AUTO_COMPACT_TOKEN_LIMIT)`。它会按当前模型的上下文窗口重新计算。用 `GOOSE_AUTO_COMPACT_TOKEN_LIMIT` 更改 token 上限。
+
+默认上限留在 OpenAI 长上下文价格档（输入 token 超过 272,000）之下。它控制压缩何时开始，而不是保证的最大请求大小：新消息、工具输出，以及压缩请求本身，都可能在两次检查之间超过这个触发点。
 
 用 `GOOSE_AUTO_COMPACT_THRESHOLD` [环境变量](/docs/guides/environment-variables#session-management)控制自动压缩行为。
-把该值设为 `0.0` 可禁用此功能。
+把该值设为 `0.0` 可禁用此功能；token 上限不会把已禁用的自动压缩重新打开。
 
 ```
 # Automatically compact sessions when 60% of available tokens are used

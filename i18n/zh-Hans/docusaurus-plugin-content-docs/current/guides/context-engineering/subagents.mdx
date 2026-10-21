@@ -271,7 +271,8 @@ The architecture follows a modular design with clear separation between the core
 ### 默认设置
 | 参数 | 默认值 | 如何自定义 |
 |-----------|---------|------------------|
-| **最大轮次** | 25 | 使用自然语言，设置 `GOOSE_SUBAGENT_MAX_TURNS`，或在[配方](/docs/guides/recipes/recipe-reference#settings)或子代理工具调用中配置 `settings.max_turns` |
+| **最大并发子代理数** | 5 | 把 `GOOSE_MAX_CONCURRENT_SUBAGENTS` 设为正整数。多出来的任务会等待，直到某个正在运行的子代理结束。该限制按父会话生效。 |
+| **最大轮次** | `GOOSE_MAX_TURNS`，否则为 1000 | 使用自然语言，设置 `GOOSE_SUBAGENT_MAX_TURNS`，或在[配方](/docs/guides/recipes/recipe-reference#settings)或子代理工具调用中配置 `settings.max_turns` |
 | **超时** | 5 分钟 | 在提示词中请求更长的超时 |
 | **扩展** | 从父级继承 | 在提示词中指定要使用的扩展 |
 | **返回模式** | 在主会话中提供全部子代理信息 | 在提示词中指定你想要多少细节 |
@@ -293,7 +294,15 @@ The architecture follows a modular design with clear separation between the core
 "Use a research subagent with 30 turns and 20-minute timeout to investigate quantum computing trends"
 ```
 
-**环境变量：** 设置 `GOOSE_SUBAGENT_MAX_TURNS` 可更改所有子代理的默认最大轮次。同样，`GOOSE_SUBAGENT_MODEL` 和 `GOOSE_SUBAGENT_PROVIDER` 设置子代理模型和提供商的默认值；配方 [`settings`](/docs/guides/recipes/recipe-reference#settings) 优先于二者。
+子代理的轮次上限采用下面第一个已配置的值：
+
+1. `delegate` 工具的 `max_turns` 参数。
+2. 子配方的 `settings.max_turns`。
+3. 环境变量或配置文件中的 `GOOSE_SUBAGENT_MAX_TURNS`。
+4. 环境变量或配置文件中的 `GOOSE_MAX_TURNS`。
+5. 默认值 1000。
+
+`GOOSE_SUBAGENT_MODEL` 和 `GOOSE_SUBAGENT_PROVIDER` 设置子代理模型和提供商的默认值；配方 [`settings`](/docs/guides/recipes/recipe-reference#settings) 优先于二者。
 
 ### 扩展控制
 

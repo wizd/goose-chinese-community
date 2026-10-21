@@ -136,8 +136,8 @@ export DATABRICKS_MAX_RETRY_INTERVAL_MS=60000        # cap the maximum retry del
 |----------|---------|---------|---------|
 | `GOOSE_MAX_TURNS` | 没有用户输入时允许的[最大轮次数](/docs/guides/sessions/smart-context-management#maximum-turns) | 整数（例如 10、50、100） | 1000 |
 | `GOOSE_GATEWAY_MAX_TURNS` | 网关会话（例如 Telegram）的最大轮次数。仅对网关流量覆盖 `GOOSE_MAX_TURNS`，因此聊天平台可以保持比 CLI/桌面会话更严格的上限。 | 整数（例如 5、10、25） | 回退到 `GOOSE_MAX_TURNS`，然后是 5 |
-| `GOOSE_SUBAGENT_MAX_TURNS` | 设置[子代理](/docs/guides/context-engineering/subagents)在超时前完成所允许的最大轮次。可被配方或子代理工具调用中的 [`settings.max_turns`](/docs/guides/recipes/recipe-reference#settings) 覆盖。 | 整数（例如 25） | 25 |
-| `GOOSE_MAX_BACKGROUND_TASKS` | 设置 goose 一次可以运行的并发后台[子代理](/docs/guides/context-engineering/subagents)任务的最大数量 | 整数（例如 1、5、10） | 5 |
+| `GOOSE_MAX_CONCURRENT_SUBAGENTS` | 每个父会话同时运行的[子代理](/docs/guides/context-engineering/subagents)数量上限。多出来的任务会等待空位。未设置或无效的值使用默认值。 | 正整数（例如 2、5、10） | 5 |
+| `GOOSE_SUBAGENT_MAX_TURNS` | 覆盖[子代理](/docs/guides/context-engineering/subagents)的轮次预算。显式的 delegate `max_turns`，或子配方的 [`settings.max_turns`](/docs/guides/recipes/recipe-reference#settings)，优先于它。 | 正整数（例如 25） | 回退到 `GOOSE_MAX_TURNS`，然后是 1000 |
 | `CONTEXT_FILE_NAMES` | 指定[提示/上下文文件](/docs/guides/context-engineering/using-goosehints#custom-context-files)的自定义文件名 | 字符串的 JSON 数组（例如 `["CLAUDE.md", ".goosehints"]`） | `[".goosehints", "AGENTS.md"]` |
 | `GOOSE_DISABLE_SESSION_NAMING` | 禁用自动 AI 生成的会话命名；避免后台模型调用，并保留默认的 “CLI Session”（goose CLI）或 “New Chat”（goose 桌面版） | “1”、“true”（不区分大小写）以启用 | false |
 | `GOOSE_PROMPT_EDITOR` | 用于撰写提示的[外部编辑器](/docs/guides/goose-cli-commands#external-editor-mode)，代替 CLI 输入 | 编辑器命令（例如 “vim”、“code --wait”） | 未设置（使用 CLI 输入） |
@@ -153,6 +153,7 @@ export DATABRICKS_MAX_RETRY_INTERVAL_MS=60000        # cap the maximum retry del
 | `GOOSE_TRUNCATED_SHOW_LINES` | 代码块被截断时，在 “… (N more lines)” 消息之前显示的行数 | 正整数 | 20 |
 | `GOOSE_NO_CODE_TRUNCATION` | 完全禁用代码块截断——所有代码块都完整显示 | “1”、“true”（不区分大小写）以启用 | false |
 | `GOOSE_AUTO_COMPACT_THRESHOLD` | 设置 goose [自动压缩会话](/docs/guides/sessions/smart-context-management#automatic-compaction)的百分比阈值。 | 0.0 到 1.0 之间的浮点数（0.0 时禁用） | 0.8 |
+| `GOOSE_AUTO_COMPACT_TOKEN_LIMIT` | 绝对的自动压缩触发值。启用自动压缩时，它和百分比阈值里更早到达的那个生效。它控制压缩何时开始，而不是保证的最大请求大小。 | 正整数 | 225000 |
 | `GOOSE_TOOL_CALL_CUTOFF` | 在摘要较旧工具输出之前完整保留的工具调用数量，以帮助维持高效的上下文使用 | 整数（例如 5、10、20） | 根据模型上下文限制和自动压缩阈值计算 |
 | `GOOSE_MOIM_MESSAGE_TEXT` | 每一轮把持久文本注入 goose 的[工作记忆](/docs/guides/context-engineering/using-persistent-instructions)。适用于行为护栏或持久提醒。 | 任意文本字符串 | 未设置 |
 | `GOOSE_MOIM_MESSAGE_FILE` | 其内容每一轮注入 goose [工作记忆](/docs/guides/context-engineering/using-persistent-instructions)的文件路径。支持 `~/`。每个文件最大 64 KB。 | 文件路径 | 未设置 |

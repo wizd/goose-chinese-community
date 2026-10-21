@@ -64,6 +64,7 @@ providers:
 | `GOOSE_DOCS_ROOT` | `goose-doc-guide` 使用的文档根（例如用于离线/隔离文档） | 包含 `goose-docs-map.md` 和 `docs/` 的本地路径或 HTTP(S) URL | `https://goose-docs.ai` | 否 |
 | `GOOSE_RECIPE_GITHUB_REPO` | 配方的 GitHub 仓库 | 格式："org/repo" | 无 | 否 |
 | `GOOSE_AUTO_COMPACT_THRESHOLD` | 设置 goose [自动压缩会话](/docs/guides/sessions/smart-context-management#automatic-compaction)的百分比阈值。 | 0.0 到 1.0 之间的浮点数（0.0 为禁用）| 0.8 | 否 |
+| `GOOSE_AUTO_COMPACT_TOKEN_LIMIT` | 绝对的自动压缩触发值。启用自动压缩时，它和百分比阈值里更早到达的那个生效。它控制压缩何时开始，而不是保证的最大请求大小。 | 正整数 | 225000 | 否 |
 | `SECURITY_PROMPT_ENABLED` | 启用[提示词注入检测](/docs/guides/security/prompt-injection-detection)以识别可能有害的命令 | true/false | false | 否 |
 | `SECURITY_PROMPT_THRESHOLD` | 提示词注入检测的灵敏度阈值（越高越严格） | 0.01 到 1.0 之间的浮点数 | 0.8 | 否 |
 | `SECURITY_PROMPT_CLASSIFIER_ENABLED` | 启用基于机器学习的提示词注入检测，用于高级威胁识别 | true/false | false | 否 |

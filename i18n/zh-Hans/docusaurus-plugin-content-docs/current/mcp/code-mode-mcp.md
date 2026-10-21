@@ -10,7 +10,7 @@ import GooseBuiltinInstaller from '@site/src/components/GooseBuiltinInstaller';
 
 Code Mode 扩展启用 [Code Mode](/docs/guides/managing-tools/code-mode)，这是一种以编程方式与 MCP 工具交互的方法。
 
-Code Mode 扩展是一个 MCP 服务器，会暴露三个元工具。启用 Code Mode 后，LLM 会编写 JavaScript 代码，由 goose 通过基于 Deno 的运行时 [Port of Context](https://github.com/AdrianCole/pctx) 执行，从而发现工具、了解其接口，并以编程方式调用它们。
+Code Mode 扩展是一个 MCP 服务器，会暴露三个元工具。启用 Code Mode 后，LLM 会编写 JavaScript 代码，由 goose 在全新的、goose 自有的 [Boa](https://boajs.dev/) JavaScript 上下文中执行，从而发现工具、了解其接口，并以编程方式调用它们。
 
 当启用了多个扩展、或工作流需要多次工具调用时，这有助于更高效地管理上下文窗口占用。
 
@@ -63,11 +63,11 @@ Code Mode 扩展是一个 MCP 服务器，会暴露三个元工具。启用 Code
 :::note 桌面版
 我来帮你创建 LOG.md，其中包含当前 git 分支、最近 3 次提交，以及 package.json 中的版本。我会在一次操作里收集这些信息。
 
-`Execute Code code: import { shell, text_editor } from "developer" ...`
+`execute_javascript: async function run() { const result = await tools.call("shell", { command: "git branch --show-current" }); return result; }`
 
 先确认 package.json 的路径：
 
-`Execute Code code: import { shell, text_editor } from "developer" ...`
+`execute_javascript: async function run() { const result = await tools.call("shell", { command: "git branch --show-current" }); return result; }`
 
 好了，我已经创建 **LOG.md**，其中包含：
 

@@ -48,7 +48,7 @@ import { AppWindow, PanelLeft, FolderDot, Paperclip, Copy, Edit2, Trash2, Downlo
         | 当前目录中的新会话 | `Cmd+N` | `Ctrl+N` |
         | 当前目录中的新会话（同一窗口） | `Cmd+T` | `Ctrl+T` |
         | 不同目录中的新会话 | `Cmd+O` | `Ctrl+O` |
-        | 切换侧边栏 | `Cmd+B` | `Ctrl+B` |
+        | 切换侧边栏 | `Cmd+/` | `Ctrl+/` |
         | 打开设置 | `Cmd+,` | `Ctrl+,` |
         | 聚焦 goose 窗口 | `Cmd+Option+G` | `Ctrl+Alt+G` |
         | 保持 goose 窗口始终置顶 | `Cmd+Shift+T` | `Ctrl+Shift+T` |

@@ -1,7 +1,7 @@
 {
   "remote": "https://github.com/aaif-goose/goose.git",
   "ref": "main",
-  "commit": "591edd47cf2cfea4957d720c607cf2a4def8673d",
+  "commit": "7143dddf732be1b259f2fde83f225b44d10caf71",
   "path": "documentation",
   "protectedBlobs": {
     "README.md": "d81b96bb3b5252ae018c95799c26a99b7cb6fa2b",
@@ -9,6 +9,6 @@
     "src/pages/community/index.tsx": "e0d25a8d844d472d2ac9b25ad5b3ef804231544a",
     "src/pages/extensions/detail.tsx": "71f0956ea1a799fc4607c4bcdf1715a6faf003e9",
     "src/pages/extensions/index.tsx": "832f1a9e3391f7d3b484901d14222e6d70fcc41a",
-    "src/pages/index.tsx": "dbecb72fc194f2761ba980a68b00575a130b0624"
+    "src/pages/index.tsx": "e313f7b3a2c6352479c1c33a15426681f9de0074"
   }
 }

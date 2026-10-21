@@ -104,9 +104,6 @@ load()
 load(source: "release-notes")
 delegate(source: "release-notes")
 delegate(instructions: "Review these docs and report stale links")
-delegate(source: "release-notes", async: true)
-load(source: "20260219_1", peek: true)
-load(source: "20260219_1")
 ```
 
-不带参数调用 `load()` 会列出来源。后台任务用 `delegate(..., async: true)` 会返回任务 id，再用 `load(source: "<task_id>")` 等待结果。
+不带参数调用 `load()` 会列出来源。`delegate` 会等待子代理结束，并返回它的结果。
